@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "run-dev": "nodemon --watch src/**/* --exec 'ts-node' src/server.ts ",
-    "build": "tsc"
+    "run-dev": "nodemon --watch 'src/**/*' --exec 'ts-node' src/server.ts ",
+    "build": "tsc",
+    "migrate" : "knex migrate:latest"
   },
   "author": "",
   "license": "ISC",
