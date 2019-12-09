@@ -1,17 +1,23 @@
 import * as express from 'express';
 import * as dotenv from 'dotenv';
-import * as cors from 'cors';
+//import * as cors from 'cors';
 import * as multer from 'multer';
-import * as helmet from 'helmet';
+//import * as helmet from 'helmet';
 import apiRoute from './routes/api.route';
 import { notFound, unknownError } from './middlewares/errorHandlers';
+import { addUser } from '../src/user/user.dao';
 
+addUser({
+        id : 2,
+        name : 'saroj',
+        age : 19
+    })
 dotenv.config();
 
 const server = express();
 
-server.use(helmet());
-server.use(cors());
+//server.use(helmet());
+//server.use(cors());
 
 const uploadConfig = multer.diskStorage({
     destination : (req, file, cb) => {

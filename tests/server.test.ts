@@ -1,3 +1,3 @@
-test('Testing test', () => {
-    expect(2 == 2).toBe(true);
-})
+test('server runs', () => {
+    expect(true).toBeTruthy();
+});

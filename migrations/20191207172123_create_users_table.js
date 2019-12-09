@@ -1,14 +1,12 @@
 exports.up = function(knex) {
-  knex.schema
+  return knex.schema
     .createTable("users", table => {
-      table.integer("id");
+      table.integer("id").primary();
       table.string("name");
       table.integer("age");
-    })
-    .then(success => console.log(success))
-    .catch(error => console.log(error));
+    });
 };
 
 exports.down = function(knex) {
-  knex.schema.dropTable("users");
+  return knex.schema.dropTable("users");
 };
