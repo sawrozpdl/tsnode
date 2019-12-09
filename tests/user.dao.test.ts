@@ -5,5 +5,5 @@ test('add user', async () => {
         id : 2,
         name : 'saroj',
         age : 19
-    })).toBe(true);
+    })).resolves;
 });

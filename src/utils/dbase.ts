@@ -1,4 +1,4 @@
 import * as knex from 'knex';
-import knexConfig from '../knexConfig';
+let knexConfig = require('../knexConfig');
 
-export default knex(knexConfig);
+export default knex(knexConfig['development']);

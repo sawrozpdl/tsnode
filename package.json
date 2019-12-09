@@ -7,9 +7,9 @@
     "test": "jest",
     "run-dev": "nodemon --watch 'src/**/*' --exec 'ts-node' src/server.ts ",
     "build": "tsc",
-    "migrate:make": "knex --knexfile src/knexConfig.ts -x ts migrate:make",
-    "migrate:latest": "knex --knexfile src/knexConfig.ts migrate:latest",
-    "migrate:rollback": "knex --knexfile src/knexConfig.ts migrate:rollback"
+    "migrate:make": "knex --knexfile 'src/knexConfig.ts' -x ts migrate:make",
+    "migrate:latest": "knex --knexfile 'src/knexConfig.ts' migrate:latest",
+    "migrate:rollback": "knex --knexfile 'src/knexConfig.ts' migrate:rollback"
   },
   "author": "",
   "license": "ISC",
