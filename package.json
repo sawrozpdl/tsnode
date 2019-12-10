@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test-for": "jest -t",
     "run-dev": "nodemon --watch 'src/**/*' --exec 'ts-node' src/server.ts ",
     "build": "tsc",
     "migrate:make": "knex --knexfile 'src/knexConfig.ts' -x ts migrate:make",
