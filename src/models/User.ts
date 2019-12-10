@@ -14,8 +14,9 @@ export default class User extends Model {
         values : ['Male', 'Female'],
         defaultValue : 'Male'
     });
-    
+
     toString() {
         return this.name.toString();
     }
+    
 }

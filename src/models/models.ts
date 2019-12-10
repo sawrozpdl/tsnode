@@ -1,15 +1,8 @@
 export class Model {
 
+
     constructor() {
 
-    }
-
-    create() {
-        console.log(`tableName =>  ${this.constructor.name}`);
-        console.log('Attributes: ');
-        for (let key in this) {
-            console.log(`${key} --> ${this[key]}`);
-        }
     }
 
     getAll() {
@@ -27,6 +20,16 @@ export class Model {
     update() {
 
     }
+
+    createTable() {
+        let attributes = '';
+        let primaryKey;
+        for (let key in this) {
+            attributes += `${key} ${(this[key]).buildQuery()}, `
+            if (this[key].primaryKey) primaryKey = key;
+        }
+        return `CREATE TABLE ${this.constructor.name} (${attributes.substring(0, attributes.length - 2)}${(primaryKey) ? `, PRIMARY KEY (${primaryKey})` : ''})`;
+    }
 }
 
 interface AttributeInterface {
@@ -36,8 +39,8 @@ interface AttributeInterface {
 }
 
 interface ForeignKeyInterface {
-    model:Model;
-    onDelete?:string;
+    model: Model;
+    onDelete?: string;
 }
 
 interface StringInterface extends AttributeInterface {
@@ -68,20 +71,22 @@ export class String extends Attribute implements StringInterface {
 
     constructor(properties: StringInterface) {
         super(properties);
-        for (let key in properties) {
-            this.maxLength = properties.maxLength || 6500;
-            this.defaultValue = properties.defaultValue || '';
-        }
+        this.maxLength = properties.maxLength || 6500;
+        this.defaultValue = properties.defaultValue || '';
+    }
+
+    buildQuery() {
+        return `varchar(${this.maxLength})${this.notNull ? ' NOT NULL' : ''} DEFAULT '${this.defaultValue}'`;
     }
 }
 
 export class ForeignKey implements ForeignKeyInterface {
 
-    model:Model;
-    onDelete:string = '';
+    model: Model;
+    onDelete: string = '';
 
     constructor(properties: ForeignKeyInterface) {
         this.model = properties.model;
-        this.onDelete = (properties.onDelete || "cascade").toUpperCase();
-    }   
+        this.onDelete = (properties.onDelete || "CASCADE").toUpperCase();
+    }
 }
