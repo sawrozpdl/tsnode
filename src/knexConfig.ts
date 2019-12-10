@@ -1,3 +1,4 @@
+require('ts-node/register');
 require('dotenv').config({path: __dirname + '/../.env'});
 
 module.exports = {
