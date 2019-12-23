@@ -4,6 +4,7 @@ export class Model {
     constructor() {
 
     }
+    
 
     getAll() {
 
@@ -25,8 +26,9 @@ export class Model {
         let attributes = '';
         let primaryKey;
         for (let key in this) {
-            attributes += `${key} ${(this[key]).buildQuery()}, `
-            if (this[key].primaryKey) primaryKey = key;
+            // attributes += `${key} ${this[key].buildQuery()}, `;
+            // if (this[key].primaryKey) primaryKey = key;
+            if (this[key] instanceof Attribute) console.log(key, this[key]);
         }
         return `CREATE TABLE ${this.constructor.name} (${attributes.substring(0, attributes.length - 2)}${(primaryKey) ? `, PRIMARY KEY (${primaryKey})` : ''})`;
     }
@@ -88,5 +90,41 @@ export class ForeignKey implements ForeignKeyInterface {
     constructor(properties: ForeignKeyInterface) {
         this.model = properties.model;
         this.onDelete = (properties.onDelete || "CASCADE").toUpperCase();
+    }
+}
+
+
+interface IntegerInterface extends AttributeInterface {
+    maxLength : number;
+    defaultValue : number;
+}
+
+export class Integer extends Attribute {
+
+    maxLength : number;
+    defaultValue : number;
+
+    constructor(properties : IntegerInterface) {
+        super(properties);
+        this.maxLength = properties.maxLength || 5;
+        this.defaultValue = properties.defaultValue || 0; 
+    }
+}
+
+
+interface EnumInterface<E> extends AttributeInterface {
+    values : Array<E>; 
+    defaultValue : E;
+}
+
+export class Enum<E> extends Attribute implements EnumInterface<E> {
+
+    values : Array<E>;
+    defaultValue : E;
+
+    constructor(properties : EnumInterface<E>) {
+        super(properties);
+        this.values = properties.values;
+        this.defaultValue = properties.defaultValue;
     }
 }

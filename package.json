@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test-for": "jest -t",
+    "start": "concurrently \"view start\" \"npm run run-dev\"",
     "run-dev": "nodemon --watch 'src/**/*' --exec 'ts-node' src/server.ts ",
     "build": "tsc",
     "migrate:make": "knex --knexfile 'src/knexConfig.ts' -x ts migrate:make",

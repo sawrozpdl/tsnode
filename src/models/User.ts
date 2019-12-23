@@ -8,9 +8,9 @@ export default class User extends Model {
     });
     id:Integer = new Integer({
         maxLength: 10,
-        defaultValue: ''
+        defaultValue: 0
     })
-    gender:Enum = new Enum({
+    gender:Enum<string> = new Enum({
         values : ['Male', 'Female'],
         defaultValue : 'Male'
     });

@@ -3,7 +3,6 @@ import User from '../src/models/User';
 
 test('model-test', () => {
     let user = new User();
-    user.create();
-
+    user.createTable();
     expect(user.toString()).toEqual('string');
 })
